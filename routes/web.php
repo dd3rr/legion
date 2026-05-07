@@ -6,7 +6,6 @@ use App\Http\Controllers\CursoController;
 use App\Models\Curso;
 use App\Http\Controllers\DocenteController;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,3 +36,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/docentes/crear', [DocenteController::class, 'create'])->name('docentes.create');
     Route::post('/docentes', [DocenteController::class, 'store'])->name('docentes.store');
 });
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/jefatura/dashboard', function () {
+        return view('jefatura.dashboard');
+    })->name('jefatura.dashboard');
+
+    Route::get('/docente/dashboard', function () {
+        return view('docente.dashboard');
+    })->name('docente.dashboard');
+
+});
+Route::get('/docentes/create', [DocenteController::class, 'create'])
+    ->name('docentes.create');
+
+Route::post('/docentes', [DocenteController::class, 'store'])
+    ->name('docentes.store');
