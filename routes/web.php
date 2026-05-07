@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
 use App\Models\Curso;
+use App\Http\Controllers\DocenteController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +27,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
+// Agrupamos todo lo que requiere estar logueado aquí
 Route::middleware(['auth'])->group(function () {
+    // Rutas para Cursos
     Route::get('/cursos/crear', [CursoController::class, 'create'])->name('cursos.create');
     Route::post('/cursos', [CursoController::class, 'store'])->name('cursos.store');
+
+    // Rutas para Docentes
+    Route::get('/docentes/crear', [DocenteController::class, 'create'])->name('docentes.create');
+    Route::post('/docentes', [DocenteController::class, 'store'])->name('docentes.store');
 });

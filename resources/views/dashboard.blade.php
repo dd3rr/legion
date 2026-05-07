@@ -9,35 +9,39 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="p-6 text-gray-900">
-    <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-bold">Cursos Registrados</h3>
-        <a href="{{ route('cursos.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            + Nuevo Curso
-        </a>
-    </div>
 
-    <table class="min-w-full table-auto border-collapse border border-gray-200">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="border p-2">Clave</th>
-                <th class="border p-2">Nombre</th>
-                <th class="border p-2">Periodo</th>
-                <th class="border p-2">Horario</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($cursos as $curso)
-            <tr>
-                <td class="border p-2 text-center">{{ $curso->clave }}</td>
-                <td class="border p-2">{{ $curso->nombre }}</td>
-                <td class="border p-2 text-center">{{ $curso->fecha_inicio }} a {{ $curso->fecha_fin }}</td>
-                <td class="border p-2 text-center">{{ $curso->hora_inicio }} - {{ $curso->hora_fin }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <h3 style="font-size: 1.2rem; font-weight: bold;">Cursos Registrados</h3>
+
+                        @if(auth()->user()->role === 'jefatura')
+                        <a href="{{ route('cursos.create') }}"
+                            style="background-color: #2563eb; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 14px;">
+                            + Nuevo Curso
+                        </a>
+                        @endif
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #f3f4f6;">
+                                <th style="border: 1px solid #d1d5db; padding: 8px;">Clave</th>
+                                <th style="border: 1px solid #d1d5db; padding: 8px;">Nombre</th>
+                                <th style="border: 1px solid #d1d5db; padding: 8px;">Periodo</th>
+                                <th style="border: 1px solid #d1d5db; padding: 8px;">Horario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cursos as $curso)
+                            <tr>
+                                <td style="border: 1px solid #d1d5db; padding: 8px; text-align: center;">{{ $curso->clave }}</td>
+                                <td style="border: 1px solid #d1d5db; padding: 8px;">{{ $curso->nombre }}</td>
+                                <td style="border: 1px solid #d1d5db; padding: 8px; text-align: center;">{{ $curso->fecha_inicio }} a {{ $curso->fecha_fin }}</td>
+                                <td style="border: 1px solid #d1d5db; padding: 8px; text-align: center;">{{ $curso->hora_inicio }} - {{ $curso->hora_fin }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
