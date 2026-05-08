@@ -15,7 +15,7 @@
 
             </a>
 
-            <a href="#"
+            <a href="{{ route('docentes.create') }}"
                class="bg-green-500 text-white p-6 rounded-lg text-center font-bold hover:bg-green-600">
 
                 Registrar Personal
