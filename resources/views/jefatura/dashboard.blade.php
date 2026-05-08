@@ -15,12 +15,12 @@
 
             </a>
 
-            <a href="#"
-               class="bg-green-500 text-white p-6 rounded-lg text-center font-bold hover:bg-green-600">
+            <a href="{{ route('docentes.create') }}"
+                class="bg-green-500 text-white p-6 rounded-lg text-center font-bold hover:bg-green-600">
 
-                Registrar Personal
+                    Registrar Personal
 
-            </a>
+                </a>
 
             <a href="#"
                class="bg-yellow-500 text-white p-6 rounded-lg text-center font-bold hover:bg-yellow-600">
