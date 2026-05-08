@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/docente/dashboard', function () {
         return view('docente.dashboard');
     })->name('docente.dashboard');
+
+    Route::post('/asignaciones', [CursoController::class, 'inscribirStore'])->name('asignaciones.store');
 });
 
 require __DIR__.'/auth.php';

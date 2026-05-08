@@ -9,8 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('docentes', function (Blueprint $table) {
-            $table->string('rol')->nullable()->after('genero');
-            $table->string('departamento')->nullable()->after('rol');
+            if (!Schema::hasColumn('docentes', 'rol')) {
+                $table->string('rol')->default('Docente');
+            }
+            if (!Schema::hasColumn('docentes', 'departamento')) {
+                $table->string('departamento')->nullable();
+            }
         });
     }
 

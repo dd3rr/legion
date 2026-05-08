@@ -22,19 +22,15 @@
 
                 </a>
 
-            <a href="#"
-               class="bg-yellow-500 text-white p-6 rounded-lg text-center font-bold hover:bg-yellow-600">
+<a href="{{ route('asignaciones.create') }}"
+   class="bg-yellow-500 text-white p-6 rounded-lg text-center font-bold hover:bg-yellow-600">
+    Inscribir al Curso
+</a>
 
-                Inscribir al Curso
-
-            </a>
-
-            <a href="#"
-               class="bg-red-500 text-white p-6 rounded-lg text-center font-bold hover:bg-red-600">
-
-                Reporte de Asistencia
-
-            </a>
+<a href="{{ route('reportes.asistencia') }}" 
+   class="bg-red-500 text-white p-6 rounded-lg text-center font-bold hover:bg-red-600">
+    Reporte de Asistencia
+</a>
 
         </div>
 

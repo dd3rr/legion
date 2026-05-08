@@ -24,8 +24,8 @@ class Docente extends Model
     }
 
     // Relación con cursos
-    public function cursos()
-    {
-        return $this->belongsToMany(Curso::class, 'curso_docente');
-    }
+  public function cursos()
+{
+    return $this->belongsToMany(Curso::class, 'curso_docente', 'docente_id', 'curso_id');
+}
 }

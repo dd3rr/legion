@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Curso;
 use App\Models\Docente;
+use App\Models\Curso;
 use Illuminate\Http\Request;
 
 class CursoController extends Controller
@@ -50,13 +50,42 @@ class CursoController extends Controller
         return redirect()->route('dashboard')->with('success', 'Curso registrado correctamente.');
     }
 
-    public function inscribir()
-    {
-        return view('cursos.inscribir');
+ public function inscribir()
+{
+    if (auth()->user()->role !== 'jefatura') {
+        abort(403);
+    }
+    $docentes = \App\Models\Docente::all();
+    $cursos = \App\Models\Curso::all();
+    return view('cursos.inscribir', compact('docentes', 'cursos'));
+}
+
+public function inscribirStore(Request $request)
+{
+$request->validate([
+        'curso_id' => 'required|exists:cursos,id',
+        'docente_ids' => 'required|array|min:1', // Validamos que sea un arreglo con al menos uno
+        'docente_ids.*' => 'exists:docentes,id',
+    ]);
+
+    $curso = \App\Models\Curso::findOrFail($request->curso_id);
+
+    // syncWithoutDetaching añade los nuevos sin borrar los que ya estaban inscritos
+    $curso->docentes()->syncWithoutDetaching($request->docente_ids);
+
+    return redirect()->back()->with('success', 'Personal inscrito correctamente al curso.');
+}
+
+public function reporte()
+{
+    // Verificación de seguridad
+    if (auth()->user()->role !== 'jefatura') {
+        abort(403);
     }
 
-    public function reporte()
-    {
-        return view('reportes.asistencia');
-    }
+    // "Eager Loading" (with): Traemos los cursos y sus docentes en una sola consulta
+    $cursos = \App\Models\Curso::with('docentes')->get();
+
+    return view('cursos.reporte', compact('cursos'));
+}
 }
