@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Docente extends Model
+class Instructor extends Model
 {
+     protected $table = 'instructores';
     protected $fillable = [
         'user_id', 'nombre', 'apellido_paterno', 'apellido_materno',
-        'curp', 'rfc', 'genero', 'gmail', 'grado_academico',
-        'carrera', 'especialidad', 'rol', 'departamento',
+        'curp', 'rfc', 'genero', 'gmail', 'grado_academico', 'especialidad',
     ];
 
     public function user()
@@ -19,12 +19,7 @@ class Docente extends Model
 
     public function cursos()
     {
-        return $this->belongsToMany(Curso::class, 'curso_docente', 'docente_id', 'curso_id');
-    }
-
-    public function calificaciones()
-    {
-        return $this->hasMany(Calificacion::class);
+        return $this->hasMany(Curso::class, 'instructor_id');
     }
 
     public function getNombreCompletoAttribute(): string
