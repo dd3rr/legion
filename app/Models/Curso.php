@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 
 class Curso extends Model
 {
+    
     protected $fillable = [
         'clave', 'nombre', 'fecha_inicio', 'fecha_fin',
         'hora_inicio', 'hora_fin', 'instructor', 'instructor_id',
